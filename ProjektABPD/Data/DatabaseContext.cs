@@ -100,22 +100,5 @@ public class DatabaseContext : DbContext
                 IdSoftware = 1
             }
         );
-
-        modelBuilder.Entity<Employee>().HasData(
-            new Employee
-            {
-                IdEmployee = 1,
-                Login = "admin",
-                Password = "admin123",
-                Role = "Admin"
-            },
-            new Employee
-            {
-                IdEmployee = 2,
-                Login = "user",
-                Password = "user123",
-                Role = "User"
-            }
-        );
     }
 }

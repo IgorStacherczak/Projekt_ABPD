@@ -86,4 +86,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+await DatabaseSeeder.SeedEmployeesAsync(app.Services);
+
 app.Run();

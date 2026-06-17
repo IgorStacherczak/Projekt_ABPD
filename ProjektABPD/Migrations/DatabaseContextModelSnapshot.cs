@@ -66,7 +66,7 @@ namespace ProjektABPD.Migrations
 
                     b.HasKey("IdClient");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("ProjektABPD.Models.Contract", b =>
@@ -113,7 +113,7 @@ namespace ProjektABPD.Migrations
 
                     b.HasIndex("IdSoftwareVersion");
 
-                    b.ToTable("Contracts");
+                    b.ToTable("Contracts", (string)null);
                 });
 
             modelBuilder.Entity("ProjektABPD.Models.Discount", b =>
@@ -139,7 +139,7 @@ namespace ProjektABPD.Migrations
 
                     b.HasKey("IdDiscount");
 
-                    b.ToTable("Discounts");
+                    b.ToTable("Discounts", (string)null);
                 });
 
             modelBuilder.Entity("ProjektABPD.Models.Employee", b =>
@@ -167,23 +167,7 @@ namespace ProjektABPD.Migrations
 
                     b.HasKey("IdEmployee");
 
-                    b.ToTable("Employees");
-
-                    b.HasData(
-                        new
-                        {
-                            IdEmployee = 1,
-                            Login = "admin",
-                            Password = "admin123",
-                            Role = "Admin"
-                        },
-                        new
-                        {
-                            IdEmployee = 2,
-                            Login = "user",
-                            Password = "user123",
-                            Role = "User"
-                        });
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("ProjektABPD.Models.Payment", b =>
@@ -208,7 +192,7 @@ namespace ProjektABPD.Migrations
 
                     b.HasIndex("IdContract");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("ProjektABPD.Models.Software", b =>
@@ -233,7 +217,7 @@ namespace ProjektABPD.Migrations
 
                     b.HasKey("IdSoftware");
 
-                    b.ToTable("Softwares");
+                    b.ToTable("Softwares", (string)null);
 
                     b.HasData(
                         new
@@ -264,7 +248,7 @@ namespace ProjektABPD.Migrations
 
                     b.HasIndex("IdSoftware");
 
-                    b.ToTable("SoftwareVersions");
+                    b.ToTable("SoftwareVersions", (string)null);
 
                     b.HasData(
                         new

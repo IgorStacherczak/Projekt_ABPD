@@ -1,11 +1,13 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ProjektABPD.Data;
 using ProjektABPD.DTOs;
 using ProjektABPD.Exceptions;
+using ProjektABPD.Models;
 
 namespace ProjektABPD.Services;
 
@@ -13,6 +15,7 @@ public class AuthService : IAuthService
 {
     private readonly DatabaseContext _context;
     private readonly IConfiguration _configuration;
+    private readonly PasswordHasher<Employee> _passwordHasher = new();
 
     public AuthService(DatabaseContext context, IConfiguration configuration)
     {
@@ -23,9 +26,18 @@ public class AuthService : IAuthService
     public async Task<LoginResponseDto> LoginAsync(LoginRequestDto dto)
     {
         var employee = await _context.Employees
-            .FirstOrDefaultAsync(e => e.Login == dto.Login && e.Password == dto.Password);
+            .FirstOrDefaultAsync(e => e.Login == dto.Login);
 
         if (employee == null)
+            throw new BadRequestException("Invalid login or password.");
+
+        var result = _passwordHasher.VerifyHashedPassword(
+            employee,
+            employee.Password,
+            dto.Password
+        );
+
+        if (result == PasswordVerificationResult.Failed)
             throw new BadRequestException("Invalid login or password.");
 
         var claims = new List<Claim>
